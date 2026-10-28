@@ -1,0 +1,20 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--fg);
+}
+
+.mark {
+  width: 1.15rem;
+  height: 1.15rem;
+  color: var(--accent);
+}
+
+.word {
+  font-family: var(--ff-display);
+  font-size: 1.6rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  transform: translateY(-0.04em);
+}

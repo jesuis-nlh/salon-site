@@ -1,0 +1,54 @@
+.options {
+  display: grid;
+  gap: var(--space-7) var(--col-gap);
+}
+
+.option {
+  display: grid;
+  gap: var(--space-4);
+  align-content: start;
+  justify-items: start;
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--line-strong);
+}
+
+.optionTitle {
+  font-size: var(--fs-xl);
+}
+
+.h2 {
+  font-size: var(--fs-2xl);
+  margin-bottom: var(--space-6);
+}
+
+.formGrid {
+  row-gap: var(--space-6);
+}
+
+.formIntro {
+  grid-column: 1 / -1;
+  max-width: 34rem;
+}
+
+.formCol {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 860px) {
+  .options {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .formIntro {
+    grid-column: 1 / span 4;
+    position: sticky;
+    top: calc(var(--top-h) + 2rem);
+    align-self: start;
+  }
+
+  .formCol {
+    grid-column: 6 / span 7;
+  }
+}

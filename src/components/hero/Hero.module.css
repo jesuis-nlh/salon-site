@@ -1,0 +1,216 @@
+.hero {
+  position: relative;
+  min-height: max(36rem, 100svh);
+  display: grid;
+  align-items: end;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* ───────── media ───────── */
+
+.media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: var(--c-noir);
+}
+
+.poster,
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.posterImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 70% 30%;
+}
+
+.poster {
+  opacity: 0;
+  animation: posterIn 1400ms 1100ms var(--ease-out) forwards;
+}
+
+.canvas {
+  opacity: 0;
+  transition: opacity 900ms var(--ease-out);
+}
+
+.media[data-live] .canvas {
+  opacity: 1;
+}
+
+.media[data-live] .poster {
+  animation: none;
+  opacity: 0;
+  transition: opacity 600ms 600ms;
+}
+
+.media[data-fallback] .poster {
+  animation: none;
+  opacity: 1;
+  transition: opacity 600ms var(--ease-out);
+}
+
+.media[data-fallback] .canvas {
+  opacity: 0;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(22, 17, 14, 0.9) 0%, rgba(22, 17, 14, 0.62) 36%, rgba(22, 17, 14, 0) 64%),
+    linear-gradient(0deg, rgba(22, 17, 14, 0.92) 0%, rgba(22, 17, 14, 0) 45%);
+}
+
+/* Portrait screens: the hair owns the top of the frame and fades out behind the text. */
+@media (max-aspect-ratio: 1/1) {
+  .media {
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 18%, transparent 62%);
+    mask-image: linear-gradient(180deg, #000 0%, #000 18%, transparent 62%);
+  }
+
+  .scrim {
+    background: linear-gradient(0deg, rgba(22, 17, 14, 0.94) 0%, rgba(22, 17, 14, 0.78) 50%, rgba(22, 17, 14, 0) 80%);
+  }
+
+  .posterImg {
+    object-position: 50% 0%;
+  }
+}
+
+/* ───────── content ───────── */
+
+.content {
+  position: relative;
+  display: grid;
+  gap: clamp(1.75rem, 4vh, 2.75rem);
+  padding-top: calc(var(--top-h) + 3rem);
+  padding-bottom: clamp(1.25rem, 3.5vh, 2.25rem);
+  pointer-events: none;
+}
+
+.content a,
+.content button {
+  pointer-events: auto;
+}
+
+.title {
+  font-size: clamp(2.6rem, 0.8rem + 5.1vw, 5.9rem);
+  line-height: 0.98;
+  letter-spacing: -0.022em;
+}
+
+@media (min-width: 900px) {
+  .line {
+    white-space: nowrap;
+  }
+}
+
+.line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+.line > span {
+  display: inline-block;
+  animation: lineUp 1100ms var(--ease-out) both;
+  animation-delay: calc(140ms + var(--i) * 90ms);
+}
+
+.lower {
+  display: grid;
+  gap: var(--space-6);
+  max-width: 34rem;
+  animation: fadeUp 900ms 520ms var(--ease-out) both;
+}
+
+.intro {
+  font-size: var(--fs-md);
+  line-height: 1.55;
+  color: var(--fg-dim);
+  max-width: 40ch;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4) var(--space-6);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-3) var(--space-6);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--line);
+  font-size: var(--fs-sm);
+  color: var(--fg-dim);
+  animation: fadeUp 900ms 700ms var(--ease-out) both;
+}
+
+/* Content drifts up and fades as the hero leaves the viewport (CSS only). */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .content {
+      animation: drift linear both;
+      animation-timeline: view();
+      animation-range: exit 0% exit 80%;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .title {
+    font-size: clamp(2.6rem, 11.5vw, 3.6rem);
+  }
+
+  .actions {
+    gap: var(--space-4) var(--space-5);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .poster {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+@keyframes lineUp {
+  from {
+    transform: translateY(105%);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+}
+
+@keyframes posterIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes drift {
+  to {
+    transform: translateY(-12vh);
+    opacity: 0;
+  }
+}

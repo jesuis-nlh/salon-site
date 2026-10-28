@@ -1,0 +1,77 @@
+.hero {
+  padding-top: calc(var(--top-h) + clamp(3rem, 9vw, 7.5rem));
+  padding-bottom: clamp(3.5rem, 8vw, 6.5rem);
+  border-bottom: 1px solid var(--line);
+}
+
+.inner {
+  display: grid;
+  gap: var(--space-7);
+  align-items: end;
+}
+
+.title {
+  font-size: var(--fs-3xl);
+  max-width: 13ch;
+  animation: rise 900ms var(--ease-out) both;
+}
+
+.lede {
+  margin-top: var(--space-6);
+  max-width: 46ch;
+  font-size: var(--fs-md);
+  line-height: 1.55;
+  color: var(--fg-dim);
+  animation: rise 900ms 120ms var(--ease-out) both;
+}
+
+.actions {
+  margin-top: var(--space-6);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4) var(--space-5);
+  align-items: center;
+  animation: rise 900ms 220ms var(--ease-out) both;
+}
+
+.visual {
+  aspect-ratio: 4 / 5;
+  max-height: 34rem;
+  width: 100%;
+  animation: curtain 1200ms 100ms var(--ease-out) both;
+}
+
+@media (min-width: 960px) {
+  .withVisual .inner {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+    gap: var(--col-gap);
+  }
+
+  .visual {
+    justify-self: end;
+    max-width: 26rem;
+  }
+}
+
+@media (max-width: 959px) {
+  .visual {
+    aspect-ratio: 16 / 10;
+    max-height: none;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(1.25rem);
+  }
+}
+
+@keyframes curtain {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}

@@ -1,0 +1,59 @@
+.btn {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.25rem;
+  padding: 0 1.75rem;
+  border-radius: 2px;
+  overflow: hidden;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  transition:
+    color var(--dur) var(--ease-out),
+    transform 500ms var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--btn-hover);
+  transform: translateY(101%);
+  transition: transform 520ms var(--ease-out);
+}
+
+.btn:hover::before,
+.btn:focus-visible::before {
+  transform: translateY(0);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.label {
+  position: relative;
+}
+
+.ghost {
+  background: transparent;
+  color: var(--fg);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+}
+
+.ghost::before {
+  background: var(--fg);
+}
+
+.ghost:hover,
+.ghost:focus-visible {
+  color: var(--bg);
+}
