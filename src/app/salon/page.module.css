@@ -1,0 +1,121 @@
+.story {
+  row-gap: var(--space-6);
+  align-items: start;
+}
+
+.storyTitle {
+  grid-column: 1 / -1;
+  font-size: var(--fs-2xl);
+  max-width: 12ch;
+}
+
+.storyText {
+  grid-column: 1 / -1;
+  display: grid;
+  gap: var(--space-5);
+  max-width: 40rem;
+}
+
+.storyVisual {
+  grid-column: 1 / -1;
+  aspect-ratio: 1 / 1;
+  max-width: 28rem;
+}
+
+.h2 {
+  font-size: var(--fs-2xl);
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.principles {
+  display: grid;
+  gap: var(--space-7) var(--col-gap);
+}
+
+.principle {
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--line);
+}
+
+.principleTitle {
+  font-size: var(--fs-lg);
+  margin-bottom: var(--space-3);
+}
+
+.team {
+  display: grid;
+  gap: var(--space-8) var(--col-gap);
+}
+
+.member {
+  display: grid;
+  gap: var(--space-2);
+  align-content: start;
+  justify-items: start;
+}
+
+.portrait {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  margin-bottom: var(--space-4);
+  overflow: hidden;
+  background: var(--c-noir-2);
+}
+
+.portraitImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.portraitEmpty {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent 0,
+    transparent 23px,
+    rgba(213, 191, 152, 0.06) 23px,
+    rgba(213, 191, 152, 0.06) 24px
+  );
+}
+
+.portraitMark {
+  width: 3rem;
+  height: 3rem;
+  color: rgba(213, 191, 152, 0.4);
+}
+
+.memberName {
+  font-size: var(--fs-lg);
+}
+
+.bio {
+  margin-top: var(--space-2);
+  max-width: 42ch;
+}
+
+@media (min-width: 860px) {
+  .principles,
+  .team {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 960px) {
+  .storyTitle {
+    grid-column: 1 / span 5;
+  }
+
+  .storyText {
+    grid-column: 1 / span 6;
+  }
+
+  .storyVisual {
+    grid-column: 8 / span 5;
+    grid-row: 1 / span 2;
+    justify-self: end;
+    width: 100%;
+  }
+}

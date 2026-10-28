@@ -1,0 +1,45 @@
+.body {
+  display: grid;
+  gap: var(--space-8);
+  max-width: 46rem;
+}
+
+.body h2 {
+  font-size: var(--fs-xl);
+  margin-bottom: var(--space-4);
+}
+
+.body p + p,
+.body p + ul,
+.body ul + p {
+  margin-top: var(--space-3);
+}
+
+.body ul {
+  display: grid;
+  gap: var(--space-2);
+  padding-left: 1.1rem;
+  list-style: disc;
+}
+
+.body dl {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.body dl div {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.body dt {
+  font-size: var(--fs-sm);
+  color: var(--fg-dim);
+}
+
+.warning {
+  padding: var(--space-4) var(--space-5);
+  border-left: 2px solid var(--accent);
+  font-size: var(--fs-sm);
+  color: var(--fg-dim);
+}

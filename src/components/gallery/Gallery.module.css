@@ -1,0 +1,247 @@
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.75rem;
+  padding: 0 1.1rem;
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+  font-size: var(--fs-sm);
+  color: var(--fg-dim);
+  transition:
+    background-color var(--dur) var(--ease-out),
+    color var(--dur) var(--ease-out);
+}
+
+.filter:hover {
+  color: var(--fg);
+}
+
+.filter[aria-pressed='true'] {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.count {
+  font-size: var(--fs-xs);
+  opacity: 0.7;
+  font-variant-numeric: tabular-nums;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-7) var(--col-gap);
+}
+
+.cell {
+  animation: cellIn 600ms var(--ease-out) both;
+}
+
+.card {
+  display: grid;
+  gap: var(--space-3);
+  width: 100%;
+  text-align: left;
+}
+
+.frame {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  background: var(--c-noir-2);
+}
+
+.cell[data-shape='landscape'] .frame {
+  aspect-ratio: 3 / 2;
+}
+
+.cell[data-shape='square'] .frame {
+  aspect-ratio: 1 / 1;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1100ms var(--ease-out), filter 600ms var(--ease-out);
+}
+
+.card:hover .img,
+.card:focus-visible .img {
+  transform: scale(1.04);
+  filter: brightness(1.1);
+}
+
+.caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-4);
+}
+
+.title {
+  display: block;
+  font-family: var(--ff-display);
+  font-size: var(--fs-md);
+  line-height: 1.25;
+}
+
+.cat {
+  font-size: var(--fs-sm);
+  color: var(--fg-dim);
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cell[data-shape='landscape'] {
+    grid-column: span 2;
+  }
+}
+
+@media (min-width: 1100px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: start;
+  }
+
+  .cell:nth-child(3n + 2) {
+    margin-top: var(--space-9);
+  }
+}
+
+/* ─────────── Lightbox ─────────── */
+
+.dialog {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--c-ivoire);
+}
+
+.dialog::backdrop {
+  background: rgba(16, 12, 10, 0.94);
+  backdrop-filter: blur(6px);
+}
+
+.dialog[open] {
+  animation: dialogIn 420ms var(--ease-out);
+}
+
+.dialogInner {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  height: 100%;
+  padding: var(--space-5) var(--gutter) calc(var(--space-5) + env(safe-area-inset-bottom));
+  gap: var(--space-4);
+  pointer-events: none;
+}
+
+.dialogFrame {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 0;
+}
+
+.dialogImg {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  pointer-events: auto;
+  animation: imgIn 500ms var(--ease-out);
+}
+
+.dialogBar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  pointer-events: auto;
+}
+
+.dialogBar .cat {
+  color: var(--c-ivoire-dim);
+}
+
+.dialogNav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.navBtn,
+.closeBtn {
+  min-height: 2.75rem;
+  padding: 0 1rem;
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px rgba(239, 232, 221, 0.3);
+  font-size: var(--fs-sm);
+  transition: background-color var(--dur) var(--ease-out), color var(--dur) var(--ease-out);
+}
+
+.navBtn:hover,
+.closeBtn:hover {
+  background: var(--c-ivoire);
+  color: var(--c-noir);
+}
+
+.closeBtn {
+  margin-left: var(--space-3);
+  background: var(--c-grege);
+  color: var(--c-noir);
+  box-shadow: none;
+}
+
+.counter {
+  min-width: 3.5rem;
+  text-align: center;
+  font-size: var(--fs-sm);
+  color: var(--c-ivoire-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 559px) {
+  .counter {
+    display: none;
+  }
+}
+
+@keyframes cellIn {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+}
+
+@keyframes dialogIn {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes imgIn {
+  from {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+}

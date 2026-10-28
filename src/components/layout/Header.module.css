@@ -1,0 +1,254 @@
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  background: transparent;
+  transition:
+    transform 520ms var(--ease-out),
+    background-color var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease-out);
+}
+
+.header[data-scrolled] {
+  background: rgba(22, 17, 14, 0.86);
+  box-shadow: 0 1px 0 var(--line);
+  backdrop-filter: blur(14px) saturate(1.2);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+}
+
+.header[data-hidden] {
+  transform: translateY(-100%);
+}
+
+.bar {
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+}
+
+.home {
+  display: inline-flex;
+  padding-block: 0.5rem;
+}
+
+.nav {
+  display: none;
+}
+
+.navList {
+  display: flex;
+  gap: clamp(1.25rem, 2.6vw, 2.75rem);
+}
+
+.navLink {
+  position: relative;
+  display: inline-block;
+  padding-block: 0.5rem;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.02em;
+  color: var(--fg-dim);
+  transition: color var(--dur-fast);
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.2rem;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.navLink:hover,
+.navLink[aria-current='page'] {
+  color: var(--fg);
+}
+
+.navLink:hover::after,
+.navLink[aria-current='page']::after {
+  transform: scaleX(1);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.cta {
+  display: none;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0 1.25rem;
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition:
+    background-color var(--dur) var(--ease-out),
+    color var(--dur) var(--ease-out),
+    box-shadow var(--dur) var(--ease-out),
+    transform 500ms var(--ease-out);
+}
+
+.cta:hover {
+  background: var(--c-grege);
+  color: var(--c-noir);
+  box-shadow: inset 0 0 0 1px var(--c-grege);
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 2.75rem;
+  padding-inline: 0.25rem;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.02em;
+}
+
+.toggleIcon {
+  position: relative;
+  width: 1.5rem;
+  height: 0.6rem;
+}
+
+.toggleIcon::before,
+.toggleIcon::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: currentColor;
+  transition: transform var(--dur) var(--ease-out), top var(--dur) var(--ease-out);
+}
+
+.toggleIcon::before {
+  top: 0;
+}
+
+.toggleIcon::after {
+  top: 100%;
+}
+
+.toggleIcon[data-open]::before {
+  top: 50%;
+  transform: rotate(35deg);
+}
+
+.toggleIcon[data-open]::after {
+  top: 50%;
+  transform: rotate(-35deg);
+}
+
+/* ─────────── Mobile menu ─────────── */
+
+.menu {
+  position: fixed;
+  inset: var(--top-h) 0 0 0;
+  z-index: -1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-7);
+  padding: clamp(1.5rem, 6vh, 3rem) var(--gutter) calc(var(--space-6) + env(safe-area-inset-bottom));
+  background: var(--c-noir);
+  overflow-y: auto;
+}
+
+.menu[data-open] {
+  animation: menuIn 520ms var(--ease-out);
+}
+
+.menuNav ul {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.menuNav li {
+  animation: itemIn 640ms var(--ease-out) both;
+  animation-delay: calc(80ms + var(--i) * 55ms);
+}
+
+.menuLink {
+  display: inline-block;
+  padding-block: 0.3rem;
+  font-family: var(--ff-display);
+  font-size: clamp(2.25rem, 10vw, 3.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.menuLink[aria-current='page'] {
+  color: var(--accent);
+}
+
+.menuFoot {
+  display: grid;
+  gap: var(--space-5);
+  animation: itemIn 640ms 360ms var(--ease-out) both;
+}
+
+.menuCta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.5rem;
+  border-radius: 2px;
+  background: var(--c-grege);
+  color: var(--c-noir);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+.menuInfo {
+  display: grid;
+  gap: 0.35rem;
+  font-size: var(--fs-sm);
+  color: var(--fg-dim);
+}
+
+@keyframes menuIn {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes itemIn {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+}
+
+@media (min-width: 640px) {
+  .cta {
+    display: inline-flex;
+  }
+}
+
+@media (min-width: 1024px) {
+  .nav {
+    display: block;
+  }
+
+  .toggle,
+  .menu {
+    display: none;
+  }
+}
+
+.menu[hidden] {
+  display: none;
+}

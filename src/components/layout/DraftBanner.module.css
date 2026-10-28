@@ -1,0 +1,30 @@
+.banner {
+  height: var(--banner-h);
+  background: var(--c-grege);
+  color: var(--c-noir);
+  font-size: var(--fs-xs);
+  overflow: hidden;
+}
+
+.banner p {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.short {
+  display: none;
+}
+
+@media (max-width: 899px) {
+  .long {
+    display: none;
+  }
+
+  .short {
+    display: inline;
+  }
+}

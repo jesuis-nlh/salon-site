@@ -1,0 +1,40 @@
+.nav {
+  margin-bottom: var(--space-6);
+  font-size: var(--fs-sm);
+  color: var(--fg-dim);
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0;
+}
+
+.item + .item::before {
+  content: '/';
+  margin: 0 0.6em;
+  opacity: 0.5;
+}
+
+.link {
+  display: inline-block;
+  transition: color var(--dur-fast);
+}
+
+@media (pointer: coarse) {
+  .nav {
+    margin-bottom: var(--space-4);
+  }
+
+  .list {
+    align-items: center;
+  }
+
+  .link {
+    padding-block: 0.7rem;
+  }
+}
+
+.link:hover {
+  color: var(--fg);
+}
