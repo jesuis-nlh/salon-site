@@ -1,7 +1,13 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Button } from '@/components/ui/Button'
 import { bookingHref } from '@/lib/salon'
 import styles from './not-found.module.css'
+
+export const metadata: Metadata = {
+  title: 'Page introuvable',
+  robots: { index: false, follow: true },
+}
 
 export default function NotFound() {
   const booking = bookingHref()
