@@ -13,7 +13,7 @@
     "render:etudes": "node scripts/render-etudes.mjs"
   },
   "engines": {
-    "node": ">=20.9"
+    "node": "22.x"
   },
   "dependencies": {
     "lenis": "^1.3.27",

@@ -30,7 +30,7 @@ npm run dev          # http://localhost:3000
 npm run check        # lint + typecheck + production build
 ```
 
-Node 20.9+ is required (`.nvmrc` pins 22).
+Node 22 is required (`.nvmrc` and `package.json` engines pin 22.x; Vercel builds with the same major).
 
 | Script | What it does |
 | --- | --- |
